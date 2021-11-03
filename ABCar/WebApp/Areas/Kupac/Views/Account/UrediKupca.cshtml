@@ -1,0 +1,73 @@
+﻿@model UrediKupcaVM
+
+
+
+    <div class="card card-5">
+        <div class="card-heading">
+            <h2 class="title">Uredjivajne korisnickih podataka</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="UrediKupca" method="post" class="form" role="form">
+
+                <input asp-for="@Model.KupacId" type="hidden" />
+
+                <div class="form-group">
+                    <label asp-for="@Model.Ime"></label>
+                    <input asp-for="@Model.Ime" class="form-control" type="text" />
+                    <span asp-validation-for="@Model.Ime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Prezime"></label>
+                    <input asp-for="@Model.Prezime" class="form-control" type="text" />
+                    <span asp-validation-for="@Model.Prezime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Email"></label>
+                    <input asp-for="@Model.Email" class="form-control">
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.BrojTelefona"></label>
+                    <input asp-for="@Model.BrojTelefona" class="form-control">
+                    <span asp-validation-for="@Model.BrojTelefona" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Adresa"></label>
+                    <input asp-for="@Model.Adresa" class="form-control">
+                    <span asp-validation-for="@Model.Adresa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Grad"></label>
+                    <input asp-for="@Model.Grad" class="form-control">
+                    <span asp-validation-for="@Model.Grad" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.DatumRegistracije"></label>
+                    <input asp-for="@Model.DatumRegistracije" readonly>
+                    <span asp-validation-for="@Model.DatumRegistracije" class="text-danger"></span>
+                </div>
+                @*<br />
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="@Model.Username"></label>
+                        <input asp-for="@Model.Username" class="form-control">
+                        <span asp-validation-for="@Model.Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Password"></label>
+                        <input asp-for="@Model.Password" class="form-control">
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Password2"></label>
+                        <input asp-for="@Model.Password2" class="form-control">
+                        <span asp-validation-for="@Model.Password2" class="text-danger"></span>
+                    </div>*@
+
+                <button class="btn btn-success" type="submit">Snimi</button>
+
+            </form>
+
+        </div>
+
+</div>

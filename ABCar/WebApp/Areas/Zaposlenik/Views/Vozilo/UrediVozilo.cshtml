@@ -1,0 +1,68 @@
+﻿@model string
+
+
+<div class="card card-5">
+    <div class="card-heading">
+        <h2 class="title">Izmjena podataka o vozilu</h2>
+    </div>
+    <div class="card-body">
+
+        <form id="form">
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="text" name="sifra" class="form-control" id="sifra" placeholder="Sfira vozila..." value="@Model" />
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-danger" style="width: 100%;"><span style="font-size: 16px;" class="hidden-xs showopacity glyphicon glyphicon-search"></span></button>
+                </div>
+            </div>
+        </form>
+
+        <br />
+
+        <div id="res"></div>
+
+    </div>
+</div>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            var forma = $("#form");
+
+            pozoviGet();
+
+            forma.submit(function (e) {
+
+                e.preventDefault();
+
+                pozoviGet();
+
+            });
+
+            function pozoviGet() {
+
+                var sifra = $("#sifra").val();
+
+                if (sifra != null && sifra.toString()!="") {
+
+                    $.get({
+
+                    url: "/Zaposlenik/Vozilo/GetVozilabySifra",
+                    data: forma.serialize(),
+                    success: function(res) {
+
+                        $("#res").html(res);
+                    }
+
+                });
+            }
+            }
+
+
+        });
+
+
+    </script>

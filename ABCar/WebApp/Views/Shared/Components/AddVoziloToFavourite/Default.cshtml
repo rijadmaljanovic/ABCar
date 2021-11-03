@@ -1,0 +1,32 @@
+﻿@model ABCar.Models.ViewModels.VoziloFavoritiVM
+    @if (Model.KupacId != null)
+    {
+        if (!Model.VecUFavoritima)
+        {
+                <i class="glyphicon glyphicon-pushpin" style="color: yellow;font-size: xx-large; cursor: pointer;" id="fav" voziloID="@Model.VoziloId" kupacID="@Model.KupacId"> Dodaj u favorite!</i>
+        }
+        else
+        {
+            <i class="glyphicon glyphicon-star" style="color: yellow;font-size: xx-large; cursor: default;" disabled>FAVORITE</i>
+        }
+    }
+
+<script>
+
+    $("#fav").click(function() {
+
+        var vozId = $(this).attr("voziloID");
+        var kupId = $(this).attr("kupacID");
+
+        $.get(
+            "/Kupac/Home/DodajVoziloUFavorite",
+            { voziloId:vozId, kupacId:kupId },
+            function(res) {
+                $("#favouriteDiv").html(res);
+            }
+            );
+
+    });
+
+
+</script>

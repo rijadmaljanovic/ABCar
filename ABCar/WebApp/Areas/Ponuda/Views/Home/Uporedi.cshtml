@@ -1,0 +1,413 @@
+﻿@model System.Collections.Generic.List<ABCar.Models.EntityModels.Vozila.Vozilo>
+
+<table class="table table-hover uporediTbl">
+    <tr>
+        <td class="col-sm-3"></td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3" style="font-weight: bold" onclick="prikaziVozilo(@item.Id)" title="Detalji o vozilu...">@item.Model.Marka.Naziv @item.Model.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>
+            Cijena
+        </td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.Cijena KM</td>
+        }
+    </tr>
+    <tr>
+        <td>Godina proizvodnje</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.GodinaProizvodnje</td>
+        }
+    </tr>
+    <tr>
+        <td>Novo</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Novo)</td>
+        }
+    </tr>
+    <tr>
+        <td>Predjeni kilometri</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.PredjeniKilometri</td>
+        }
+    </tr>
+    <tr>
+        <td>Potrosnja po 100km</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@(item.PotrosnjaPo100km?.ToString() ?? "-")</td>
+        }
+    </tr>
+    <tr>
+        <td>Registrovan do</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@(item.RegistrovanDo?.ToShortDateString() ?? "-")</td>
+        }
+    </tr>
+    <tr>
+        <td>Broj brzina</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.BrojBrzina.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Broj vrata</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.BrojVrata.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Kubikaza</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@(item.Kubikaza?.ToString() ?? "-")</td>
+        }
+    </tr>
+    <tr>
+        <td>Emisioni standard</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.EmisioniStandard.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Vrsta mjenjaca</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.VrstaMjenjaca.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Vrsta motora</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.VrstaMotora.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Snaga motora KW</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@(item.SnagaMotoraKW?.ToString() ?? "-")</td>
+        }
+    </tr>
+    <tr>
+        <td>Snaga motora KS</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@(item.SnagaMotoraKS?.ToString() ?? "-")</td>
+        }
+    </tr>
+    <tr>
+        <td>Vrsta pogona</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.VrstaPogona.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Vrsta svjetla</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.VrstaSvjetla.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Broj prethodnih vlasnika</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@(item.BrojPrethodnihVlasnika?.ToString() ?? "0")</td>
+        }
+    </tr>
+    <tr>
+        <td>Broj sjedecih mjesta</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.BrojSjedecihMjesta</td>
+        }
+    </tr>
+    <tr>
+        <td>Boja</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.Boja.Naziv</td>
+        }
+    </tr>
+    <tr>
+        <td>Mat</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Mat)</td>
+        }
+    </tr>
+    <tr>
+        <td>Metalik</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Novo)</td>
+        }
+    </tr>
+    <tr>
+        <td>Velicina felgi</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@item.VelicinaFelgi</td>
+        }
+    </tr>
+    <tr>
+        <td>Alu felge</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.AluFelge)</td>
+        }
+    </tr>
+
+    @*checkeed*@
+    <tr>
+        <td>ABS</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ABS)</td>
+        }
+    </tr>
+    <tr>
+        <td>ESP</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ESP)</td>
+        }
+    </tr>
+    <tr>
+        <td>AUX</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.AUX)</td>
+        }
+    </tr>
+    <tr>
+        <td>Alarm</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Alarm)</td>
+        }
+    </tr>
+    <tr>
+        <td>Auto kuka</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.AutoKuka)</td>
+        }
+    </tr>
+    <tr>
+        <td>Bluetooth</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Bluetooth)</td>
+        }
+    </tr>
+    <tr>
+        <td>CD</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.CD)</td>
+        }
+    </tr>
+    <tr>
+        <td>USB</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.USB)</td>
+        }
+    </tr>
+    <tr>
+        <td>Centralno kljucanje</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.CentralnoKljucanje)</td>
+        }
+    </tr>
+    <tr>
+        <td>Daljinsko kljucanje</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.DaljinskoKljucanje)</td>
+        }
+    </tr>
+    <tr>
+        <td>Dvozonska klima</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.DvozonskaKlima)</td>
+        }
+    </tr>
+    <tr>
+        <td>Obicna klima</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ObicnaKlima)</td>
+        }
+    </tr>
+    <tr>
+        <td>Automatksa klima</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.AutomatskaKlima)</td>
+        }
+    </tr>
+    <tr>
+        <td>El. podesavanje retrovizora</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ElPodesavanjeRetrovizora)</td>
+        }
+    </tr>
+    <tr>
+        <td>El. podesavanje sjedista</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ElPodesavanjeSjedista)</td>
+        }
+    </tr>
+    <tr>
+        <td>El. podizaci prozora</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ElPodizaciProzora)</td>
+        }
+    </tr>
+    <tr>
+        <td>El. zastita protiv kradje</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ElZastitaProtivKradje)</td>
+        }
+    </tr>
+    <tr>
+        <td>Mehanicka zastita protiv kradje</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.MehanickaZastitaProtivKradje)</td>
+        }
+    </tr>
+    <tr>
+        <td>Kozna sjedista</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.KoznaSjedista)</td>
+        }
+    </tr>
+    <tr>
+        <td>Maglenke</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Maglenke)</td>
+        }
+    </tr>
+    <tr>
+        <td>Zatamnjena stakla</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ZatamnjenaStakla)</td>
+        }
+    </tr>
+    <tr>
+        <td>Siber</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Siber)</td>
+        }
+    </tr>
+
+    <tr>
+        <td>Naslonjac za ruku</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.NaslonjacZaRuku)</td>
+        }
+    </tr>
+    <tr>
+        <td>Navigacija</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Navigacija)</td>
+        }
+    </tr>
+    <tr>
+        <td>Panorama krov</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.PanoramaKrov)</td>
+        }
+    </tr>
+    <tr>
+        <td>Parking asistent</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ParkingAsistent)</td>
+        }
+    </tr>
+    <tr>
+        <td>Parking senzor</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ParkingSenzor)</td>
+        }
+    </tr>
+    <tr>
+        <td>Putno racunalo</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.PutnoRacunalo)</td>
+        }
+    </tr>
+    <tr>
+        <td>Smart-stop sistem</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.SmartStopSistem)</td>
+        }
+    </tr>
+    <tr>
+        <td>Tempomat</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.Tempomat)</td>
+        }
+    </tr>
+    <tr>
+        <td>Tipke na volanu</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.TipkeNaVolanu)</td>
+        }
+    </tr>
+    <tr>
+        <td>Zracni jastuk prednji</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ZracniJastukPrednji)</td>
+        }
+    </tr>
+    <tr>
+        <td>Zracni jastuk bocni</td>
+        @foreach (var item in Model)
+        {
+            <td class="col-sm-3">@await Html.PartialAsync("Checked", item.ZracniJastukBocni)</td>
+        }
+    </tr>
+
+
+
+
+
+</table>

@@ -1,0 +1,343 @@
+﻿@using ABCar.WebApp.ViewComponents
+@model ABCar.Models.ViewModels.VoziloDetalji
+
+<div class="container" id="detalji">
+
+    <div class="jumbotron text-danger text-center" style="background-color: black; color: white;">
+        <h2>@Model.Vozilo.Model.Marka.Naziv @Model.Vozilo.Model.Naziv</h2>
+        <div id="favouriteDiv">
+            @await Component.InvokeAsync("AddVoziloToFavourite", new { voziloId = Model.Vozilo.Id })
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-5" style="">
+            @await Html.PartialAsync("SlikeGalerijaPartial", Model.Slike)
+        </div>
+        <div class="col-sm-6" style="margin-left: 30px;">
+
+            <table class="table tabelaDetalji">
+                <tr>
+                    <td>Proizvodac</td>
+                    <td>@Model.Vozilo.Model.Marka.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>@Model.Vozilo.Model.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Vrsta motora</td>
+                    <td>@Model.Vozilo.VrstaMotora.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Vrsta mjenjaca</td>
+                    <td>@Model.Vozilo.VrstaMjenjaca.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Broj Brzina</td>
+                    <td>@Model.Vozilo.BrojBrzina.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Emisioni standard</td>
+                    <td>@Model.Vozilo.EmisioniStandard.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Vrsta pogona</td>
+                    <td>@Model.Vozilo.VrstaPogona.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Vrsta svjetla</td>
+                    <td>@Model.Vozilo.VrstaSvjetla.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Broj vrata</td>
+                    <td>@Model.Vozilo.BrojVrata.Naziv</td>
+                </tr>
+                <tr>
+                    <td>Tip vozila</td>
+                    <td>@Model.Vozilo.TipVozila.Naziv</td>
+                </tr>
+            </table>
+            <br />
+
+            <div class="row DetaljiCijenaDiv">
+                <div class="col-sm-4">
+                    @if (Model.Vozilo.Novo)
+                    {<p  style="color:whitte; border-radius: 15px 50px; background: red; padding: 20px;">NOVO!</p>}
+                </div>
+                <div class="col-sm-4 align-middle"><strong>@Model.Vozilo.Cijena.ToString() KM</strong></div>
+                <div class="col-sm-4" >
+                    @if (Model.Vozilo.Akcija !=null && Model.Vozilo.Akcija>0)
+                    {<p style="color:whitte; border-radius: 15px 50px; background: yellow; padding: 20px;">AKCIJA- @Model.Vozilo.Akcija %!</p>}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+
+        <table class="table table-responsive text-left">
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ObicnaKlima)
+                    <label asp-for="@Model.Vozilo.ObicnaKlima"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.AutomatskaKlima)
+                    <label asp-for="@Model.Vozilo.AutomatskaKlima"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.DvozonskaKlima)
+                    <label asp-for="@Model.Vozilo.DvozonskaKlima"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ElPodesavanjeRetrovizora)
+                    <label asp-for="@Model.Vozilo.ElPodesavanjeRetrovizora"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ElPodesavanjeSjedista)
+                    <label asp-for="@Model.Vozilo.ElPodesavanjeSjedista"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ElPodizaciProzora)
+                    <label asp-for="@Model.Vozilo.ElPodizaciProzora"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Alarm)
+                    <label asp-for="@Model.Vozilo.Alarm"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.CentralnoKljucanje)
+                    <label asp-for="@Model.Vozilo.CentralnoKljucanje"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.DaljinskoKljucanje)
+                    <label asp-for="@Model.Vozilo.DaljinskoKljucanje"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Siber)
+                    <label asp-for="@Model.Vozilo.Siber"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.AutoKuka)
+                    <label asp-for="@Model.Vozilo.AutoKuka"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.PanoramaKrov)
+                    <label asp-for="@Model.Vozilo.PanoramaKrov"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ABS)
+                    <label asp-for="@Model.Vozilo.ABS"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ESP)
+                    <label asp-for="@Model.Vozilo.ESP"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.SmartStopSistem)
+                    <label asp-for="@Model.Vozilo.SmartStopSistem"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ZracniJastukPrednji)
+                    <label asp-for="@Model.Vozilo.ZracniJastukPrednji"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ZracniJastukBocni)
+                    <label asp-for="@Model.Vozilo.ZracniJastukBocni"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.NaslonjacZaRuku)
+                    <label asp-for="@Model.Vozilo.NaslonjacZaRuku"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.PutnoRacunalo)
+                    <label asp-for="@Model.Vozilo.PutnoRacunalo"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.TipkeNaVolanu)
+                    <label asp-for="@Model.Vozilo.TipkeNaVolanu"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Bluetooth)
+                    <label asp-for="@Model.Vozilo.Bluetooth"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Mat)
+                    <label asp-for="@Model.Vozilo.Mat"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Metalik)
+                    <label asp-for="@Model.Vozilo.Metalik"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.KoznaSjedista)
+                    <label asp-for="@Model.Vozilo.KoznaSjedista"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Maglenke)
+                    <label asp-for="@Model.Vozilo.Maglenke"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ZatamnjenaStakla)
+                    <label asp-for="@Model.Vozilo.ZatamnjenaStakla"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.AluFelge)
+                    <label asp-for="@Model.Vozilo.AluFelge"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Tempomat)
+                    <label asp-for="@Model.Vozilo.Tempomat"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ParkingSenzor)
+                    <label asp-for="@Model.Vozilo.ParkingSenzor"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ParkingAsistent)
+                    <label asp-for="@Model.Vozilo.ParkingAsistent"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.USB)
+                    <label asp-for="@Model.Vozilo.USB"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.CD)
+                    <label asp-for="@Model.Vozilo.CD"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.AUX)
+                    <label asp-for="@Model.Vozilo.AUX"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.Navigacija)
+                    <label asp-for="@Model.Vozilo.Navigacija"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.MehanickaZastitaProtivKradje)
+                    <label asp-for="@Model.Vozilo.MehanickaZastitaProtivKradje"></label>
+                </td>
+                <td>
+                    @await Html.PartialAsync("Checked", Model.Vozilo.ElZastitaProtivKradje)
+                    <label asp-for="@Model.Vozilo.ElZastitaProtivKradje"></label>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+
+
+<!-- Container for the image gallery -->
+<div class="container" id="galerija" style="display: none;">
+
+    <!-- Full-width images with number text -->
+    @{
+        var ukupanBrojSlika = Model.Slike.Count;
+        for (int i = 0; i < ukupanBrojSlika; i++)
+        {
+            <div class="mySlides">
+                <div class="numbertext">@(i + "/" + ukupanBrojSlika)</div>
+                <img src="@Model.Slike[i]" style="width: 100%; height: 100%;">
+                <span class="deleteMeetingClose">&times;</span>
+            </div>
+        }
+    }
+
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    <!-- Image text -->
+    <div class="caption-container">
+        <p id="caption">@(Model.Vozilo.Model.Marka.Naziv + " - " + Model.Vozilo.Model.Naziv)</p>
+
+        <!-- Thumbnail images -->
+        <div class="row">
+            @for (int i = 0; i < ukupanBrojSlika; i++)
+            {
+                <div class="column">
+                    <img class="demo cursor" src="@Model.Slike[i]" style="width: 200px; height: 200px;" onclick="currentSlide(@(i+1))" alt="The Woods">
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+
+    $(".deleteMeetingClose").click(function () {
+        //close action
+        hideGallery();
+    });
+
+    function showGallery() {
+        $("#detalji").hide();
+        $("#galerija").show();
+    }
+
+    function hideGallery() {
+        $("#detalji").show();
+        $("#galerija").hide();
+    }
+
+</script>
+
+

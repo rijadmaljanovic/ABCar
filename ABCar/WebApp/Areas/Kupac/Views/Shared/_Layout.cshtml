@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>:: ABCar ::</title>
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+    <link href="~/css/card.css" rel="stylesheet" />
+    <link href="~/css/ponuda.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    @*SIDEBAR*@
+    <div class="col-sm-2">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+
+                @*OVO SLUZI ZA SIDEBAR HEADER!*@
+                <li class="sidebar-brand">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">ABCar</a>
+                </li>
+
+                @* SIDEBAR KOMPONENTE *@
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>Korisnički profil </strong><span class="caret"></span><span style="font-size:16px;" class="hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li>
+                            <a asp-controller="Account" asp-action="PrikaziKupca">Prikaz profila</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="UrediKupca">Uredi lične podatke</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="UrediPassword">Uredi korisnički račun</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><hr /></li>
+                <li>
+                    <a asp-action="PrikaziFavorite" asp-controller="Home" asp-area="Kupac"><strong>Favorites </strong>@*<span class="caret"></span>*@<span style="font-size:16px;" class="hidden-xs showopacity glyphicon glyphicon-star"></span></a>
+                </li>
+                <li><hr /></li>
+                <li>
+                    @await Component.InvokeAsync(typeof(ABCar.WebApp.ViewComponents.UserNotificationComponent))
+                </li>
+                <li><hr /></li>
+            </ul>
+        </div>
+    </div>
+
+
+    @*NAVBAR + PageContent*@
+    <div class="col-sm-10" style="padding-left:0px;">
+
+        @*NAVBAR*@
+        <nav class="navbar navbar-inverse" style="margin-bottom:0px;">
+            <div class="container-fluid">
+                @*<div class="navbar-header">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">ABCar</a>
+                    </div>*@
+
+                <ul class="nav navbar-nav navbar-right">
+                    @await Component.InvokeAsync(typeof(ABCar.WebApp.ViewComponents.LayoutLoginComponent))
+                </ul>
+            </div>
+        </nav>
+        
+        
+        <div class="" style="margin:15px;">
+            @if (TempData["Confirmation"] != null)
+            {
+                <div id="confirmationMssg" class="alert alert-danger text-center"><span>@TempData["Confirmation"]</span></div>
+            }
+
+            @RenderBody()
+
+        </div>
+
+    </div>
+
+</body>
+</html>

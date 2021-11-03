@@ -1,0 +1,27 @@
+﻿@using ABCar.Models.ViewModels
+@model PonudaVM
+
+
+
+@if (Model.ListaVozila.Count > 0)
+{
+    <div class="row">
+        @foreach (var item in Model.ListaVozila)
+        {
+            @await Html.PartialAsync("VoziloPonudaPartial", item)
+        }
+    </div>
+
+    @if (!Model.PrikazanaSvaVozila)
+     {
+         <div class="row text-center loadMoreDiv">
+             <input type="button" class="btn btn-default" onclick="ucitajJos()" value="LOAD MORE" id="loadMoreBtn" style="margin:20px;"/>
+         </div>
+     }
+}
+else
+{
+         <div class="text-center">
+             <h2 class="text-danger">Nema rezultata!</h2>
+         </div>
+}

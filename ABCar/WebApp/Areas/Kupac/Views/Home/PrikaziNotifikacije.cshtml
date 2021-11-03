@@ -1,0 +1,28 @@
+﻿@model System.Collections.Generic.List<ABCar.Models.EntityModels.Notifikacija>
+
+<div id="res">
+    <h2>Notifikacije...</h2>
+
+    <table class="table table-bordered">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-danger"><strong>@item.Text</strong></td>
+                <td>
+                    <button class="btn btn-danger" onclick="prikaziVozilo(@item.VoziloFavorit.VoziloId)">Provjeri ==></button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script>
+
+    function prikaziVozilo(id) {
+        $.get(
+            "/Ponuda/Home/GetVoziloDetalji",
+            { id: id },
+            function (res) { $("#res").html(res) });
+    }
+
+</script>

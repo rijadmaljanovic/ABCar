@@ -1,0 +1,18 @@
+﻿@model bool
+
+
+@*@if (!Model)
+{
+    <div>Klikom na <a asp-action="CreateAdminAccount" class="btn btn-success"> CREATE </a> kreira se novi administratorski profil za login(USERNAME: admin   PASS: admin)</div>
+}
+else
+{
+    <div>USERNAME: <strong>admin</strong>  PASSWORD: <strong>admin</strong>     ===> admin account successfully created!</div>
+}
+
+<br />
+<br />
+<hr />
+<br />*@
+
+@await Component.InvokeAsync(typeof(PonudaViewComponent))

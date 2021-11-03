@@ -1,0 +1,17 @@
+﻿@using ABCar.Models.EntityModels.Vozila
+@model List<SelectListItem>
+
+
+<label>Model</label>
+@if (Model != null)
+{
+<select id="model" class="form-control" name="Vozilo.ModelId" asp-items="@Model">
+    <option value="null"></option>
+</select>
+}
+else
+{
+    <select id="model" class="form-control" data-val="true" data-val-required="The ModelId field is required." name="Vozilo.ModelId" disabled>
+        <option value="null" disabled selected></option>
+    </select>
+}

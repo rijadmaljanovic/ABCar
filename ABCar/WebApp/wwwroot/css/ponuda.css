@@ -1,0 +1,287 @@
+﻿.ponudaPanel {
+    background-color: #fff;
+    border-top: 4px solid #ebebeb;
+    margin-top: 25px;
+    padding: 0px !important;
+    z-index: 0;
+    cursor: pointer;
+    height: 450px;
+}
+
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+#uporediToggleBtn:hover i{
+    width:12px;
+    height: 12px;
+}
+
+table.uporediTbl tr td:first-child {
+    font-weight: bold;
+    text-align: left;
+}
+
+table.uporediTbl td{
+    text-align:center;
+    cursor: pointer;
+}
+
+table.uporediTbl tr:first-child:hover {
+    background-color: #ebebeb;
+}
+
+table.uporediTbl tr:first-child td:hover{
+    color: blue;
+}
+
+table.uporediTbl tr:hover{
+    background-color:white;
+    font-weight: bold;
+}
+
+
+.uporediX {
+    color: red;
+    position: absolute;
+    top: -15px;
+    opacity: 1;
+    visibility: hidden;
+    font-size: x-large;
+}
+    .uporediX:hover {
+        color: red;
+        opacity: 1;
+    }
+
+    .ponudaPanel:hover {
+        -webkit-box-shadow: -5px 8px 29px 1px rgba(130,13,13,0.73);
+        -moz-box-shadow: -5px 8px 29px 1px rgba(130,13,13,0.73);
+        box-shadow: -5px 8px 29px 1px #00000075;
+        z-index: 0;
+        border-top: 4px solid red;
+    }
+
+
+.borderless tr, .borderless th {
+    border: none !important;
+}
+
+.slikaVozilo {
+}
+td.podaciVozilo, h1.podaciVozilo {
+    cursor: default;
+}
+
+.logoDiv {
+    padding: 0px;
+}
+
+.logoSlika {
+    width: 100%;
+    height: 50px;
+    -webkit-filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+.logoSlika:hover {
+    -webkit-filter: grayscale(0%);
+    opacity: 1;
+}
+
+.sortDiv {
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+.classForSelectedItem {
+    font-size: large !important;
+    height: inherit !important;
+}
+
+.ponudaPozadina {
+    background-color: #ebebeb;
+    z-index: -1;
+    padding: 0px;
+}
+.pretragaDiv {
+    background-color: #fff;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow: hidden;
+}
+
+.tabelaDetalji td:nth-child(even) {
+    color: black;
+    font-weight: bold;
+    text-align: left;
+}
+.tabelaDetalji td:nth-child(odd) {
+    text-align: right;
+}
+
+.DetaljiCijenaDiv {
+    font-size:large;
+    text-align: center;
+    border: 2px solid black;
+    padding: 20px;
+    font-family: fantasy;
+    display: flex;
+    align-items: center;
+}
+
+.ponudaImeAuta {
+    font-size: x-large;
+    height: 60px;
+    padding: 0px 5px 0px 5px;
+
+}
+
+.uporediOkvir {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: x-large;
+    display: none; 
+}
+    .uporediOkvir:hover {
+        color: red;
+        background-color: rgba(255,255,255,0.6);
+        border:1px solid transparent;
+        border-radius: 25px;
+    }
+
+#uporediDiv {
+    display: block;
+    position: fixed;
+    width: 300px;
+    top: 50px;
+    right: 20px;
+    z-index: 1;
+    text-align: center;
+    padding-top: 10px;
+    font-size: small;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+
+
+
+
+/* GALLERY GALLERY GALLERY GALLERY */
+* {
+    box-sizing: border-box;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+    position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+    width: 100%;
+    height: 700px;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+    cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 20%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 15px;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+    text-align: center;
+    padding: 2px 16px;
+    color: white;
+}
+
+#caption {
+    background-color: #222;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Six columns side by side */
+.column {
+    float: left;
+    width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+.deleteMeetingClose {
+    font-size: xx-large;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+}

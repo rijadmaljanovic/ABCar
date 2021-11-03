@@ -1,0 +1,13 @@
+﻿@model ABCar.Models.EntityModels.Korisnici.KorisnickiRacun
+
+@if (Model != null)
+{
+    <li><a  class="btn" asp-area="Login" asp-controller="Home" asp-action="Logout" asp-route-url="">@Model.KorisnickoIme, <span class="glyphicon glyphicon-log-out"></span><span> Odjava</span></a></li>
+
+}
+else
+{
+    <li><a asp-area="Login" asp-controller="Home" asp-action="Register"><span class="glyphicon glyphicon-user"></span> Registracija</a></li>
+    <li><a asp-area="Login" asp-controller="Home" asp-action="Index"><span class="glyphicon glyphicon-log-in"></span> Prijava </a></li>
+
+}

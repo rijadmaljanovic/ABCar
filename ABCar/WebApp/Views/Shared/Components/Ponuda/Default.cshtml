@@ -1,0 +1,437 @@
+﻿@model ABCar.Models.ViewModels.PretragaVM
+
+
+<div class="row" id="uporediDiv" style="background-color:aliceblue; display: none;">
+    @*<div class="panel-heading text-center">UPOREDI</div>*@
+    <div class="col-sm-1 text-center" id="uporediToggleBtn" onclick="toggle()" style="">
+            <i class="arrow right" id="arrowRightBtn"></i>
+            <i class="arrow left" id="arrowLeftBtn" style="display: none;"></i>
+    </div>
+
+    <div class="col-sm-11" id="uporediSve" style="margin:5px;">
+            <div class="col-sm-4" onmouseover="prikaziX(1)" onmouseout="sakrijX(1)" style="cursor: pointer;">
+                <div id="odabrano1"></div>
+                <span class="close uporediX" id="uporediX1" onclick="ukloniVoziloZaUporedbu(0)">&times;</span>
+            </div>
+            <div class="col-sm-4" onmouseover="prikaziX(2)" onmouseout="sakrijX(2)" style="cursor: pointer;">
+                <div id="odabrano2"></div>
+                <span class="close uporediX" id="uporediX2" onclick="ukloniVoziloZaUporedbu(1)">&times;</span>
+            </div>
+            <div class="col-sm-4" onmouseover="prikaziX(3)" onmouseout="sakrijX(3)" style="cursor: pointer;">
+                <div id="odabrano3"></div>
+                <span class="close uporediX" id="uporediX3" onclick="ukloniVoziloZaUporedbu(2)">&times;</span>
+            </div>
+            <div class="col-sm-12 text-center" style="padding-top: 10px;">
+                <button class="btn btn-primary" style="color: white;" disabled id="uporediBtn" onclick="uporedi()">UPOREDI</button>
+            </div>
+        </div>
+    </div>
+
+
+<div class="container-fluid ponudaPozadina">
+
+    <form id="formic">
+
+        @*SORT*@
+        <div class="col-sm-9" style="padding: 0px;">
+            <div class="row sortDiv">
+                <div class="col-sm-8 text-left">
+                    <h1>Ponuda vozila</h1>
+                </div>
+                <div class="col-sm-4">
+                    <select style="width: -webkit-fill-available; height: 27px;" asp-items="@Model.Sortiranja" asp-for="@Model.VrstaSortiranja" onchange="ucitajPonudu()" class="classForSelectedItem"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div id="loadingImage" style="text-align: center;">
+                        <img src="images/loader.gif">
+                    </div>
+
+                    @*PONUDA*@
+                    <div class="col-sm-12" id="ponuda">
+                        
+                    </div>
+                    
+                    <div id="loadingImage2" style="text-align: center;">
+                        <img src="images/loader.gif">
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+
+
+        @*FILTER*@
+        <div class="col-sm-3 pretragaDiv">
+
+            <h1 class="text-center">
+                Pretrazi
+                <span>
+                    <div class="glyphicon glyphicon-search"></div>
+                </span>
+            </h1>
+
+            <div>
+                <label>Marka:</label>
+                <select asp-items="@Model.Marke" asp-for="@Model.MarkeId" class="form-control classForSelectedItem" id="marka" onchange="ucitajPonudu()"></select>
+            </div>
+            <div id="model">
+            </div>
+            <hr />
+            <div>
+                <label>Vrsta mjenjaca:</label>
+                <select asp-items="@Model.VrstaMjenjaca" asp-for="@Model.VrstaMjenjacaId" class="form-control classForSelectedItem" onchange="ucitajPonudu()"></select>
+            </div>
+            <div>
+                <label>Vrsta motora:</label>
+                <select asp-items="@Model.VrstaMotora" asp-for="@Model.VrstaMotoraId" class="form-control classForSelectedItem" onchange="ucitajPonudu()"></select>
+            </div>
+            <hr />
+            <div class="row text-center">
+                <div class="col-sm-4">SVE</div>
+                <div class="col-sm-4">NOVO</div>
+                <div class="col-sm-4">POLOVNO</div>
+            </div>
+            <div class="row">
+                <input class="col-sm-4" type="radio" name="novo" value="null" asp-for="@Model.Novo" onchange="ucitajPonudu()" id="svaVozilaRadioBtn" checked="true">
+                <input class="col-sm-4" type="radio" name="novo" value="true" asp-for="@Model.Novo" onchange="ucitajPonudu()">
+                <input class="col-sm-4" type="radio" name="novo" value="false" asp-for="@Model.Novo" onchange="ucitajPonudu()">
+            </div>
+            <hr />
+            <div>
+                <label>Godina proizvodnje</label>
+                <table>
+                    <tr>
+                        <td class="col-sm-1">od:</td>
+                        <td class="col-sm-5" style="padding: 0px;">
+                            <select asp-items="@Model.GodinaProizvodnjeItems" asp-for="@Model.GodinaProizvodnjeOd" class="form-control classForSelectedItem" onchange="ucitajPonudu()"></select>
+                        </td>
+                        <td class="col-sm-1">do:</td>
+                        <td class="col-sm-5" style="padding: 0px;">
+                            <select asp-items="@Model.GodinaProizvodnjeItems" asp-for="@Model.GodinaProizvodnjeDo" class="form-control classForSelectedItem" onchange="ucitajPonudu()"></select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <hr />
+            <div>
+                <label>Cijena</label>
+                <table>
+                    <tr>
+                        <td class="col-sm-1">od:</td>
+                        <td class="col-sm-5" style="padding: 0px;">
+                            <select asp-items="@Model.CijeneItems" asp-for="@Model.CijenaOd" class="form-control classForSelectedItem classForSelectedItem" onchange="ucitajPonudu()"></select>
+                        </td>
+                        <td class="col-sm-1">do:</td>
+                        <td class="col-sm-5" style="padding: 0px;">
+                            <select asp-items="@Model.CijeneItems" asp-for="@Model.CijenaDo" class="form-control classForSelectedItem classForSelectedItem" onchange="ucitajPonudu()"></select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <hr />
+            @*<div class="text-center">
+                    <input type="submit" class="btn btn-success" value="Pretrazi" />
+                </div>*@
+            <br />
+            <div style="background-color: white;">
+                @foreach (var item in Model.Proizvodjaci)
+                {
+                    <div class="col-sm-3 logoDiv" onclick="proizvodjacClick(@item.Id)">
+                        <img src="@item.LogoImagePath" alt="@item.Naziv" class="logoSlika" />
+                    </div>
+                }
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script>
+
+    var boolForToggle = true;
+
+    function toggle() {
+
+        if (boolForToggle) {
+            $("#uporediSve").toggle("hide");
+            $("#uporediDiv").animate({ "right": "-230px" }, "slow");
+
+            $("#arrowRightBtn").hide();
+            $("#arrowLeftBtn").show();
+        }
+        else {
+            $("#uporediSve").toggle("show");
+            $("#uporediDiv").animate({ "right": "20px" }, "slow");
+
+            $("#arrowLeftBtn").hide();
+            $("#arrowRightBtn").show();
+        }
+
+        boolForToggle = !boolForToggle;
+
+    }
+
+
+    var nizId = new Array();
+    var brojVozilaZaUporedit = 0;
+
+    var scrollNumber = 0;
+
+    function prikaziX(i) {
+        $("#uporediX" + i).css("visibility", "visible");
+    }
+
+    function sakrijX(i) {
+        $("#uporediX" + i).css("visibility", "hidden");
+    }
+
+
+    function showLoadingGif() {
+        $("#ponuda").hide();
+        $("#loadMoreBtn").hide();
+        $("#loadingImage").show();
+    }
+    function hideLoadingGif() {
+        $("#loadingImage").hide();
+        $("#ponuda").show();
+        $("#loadMoreBtn").show();
+
+    }
+
+    function successFunction(res, append = false) {
+        if (append) {
+            $("#ponuda").append(res);
+        }
+        else {
+            $("#ponuda").html(res);
+        }
+        hideLoadingGif();
+    }
+
+    function ucitajPonudu() {
+
+        showLoadingGif();
+
+        scrollNumber = 0;
+
+        var form = $("#formic");
+
+        $.post(
+            "/Ponuda/Home/GetVozilaByParameters",
+            form.serialize() + "&scrollNum="+scrollNumber.toString(),
+            function (res) { successFunction(res, false); });
+
+        //alert(scrollNumber + " ucitajPonudu");
+
+    }
+
+    function ucitajJos() {
+
+        $("#loadingImage2").show();
+
+        $(".loadMoreDiv").css("display", "none");
+
+        scrollNumber++;
+
+        var form = $("#formic");
+
+        $.post(
+            "/Ponuda/Home/GetVozilaByParameters",
+            form.serialize() + "&scrollNum="+scrollNumber.toString(),
+            function (res) { successFunction(res, true); });
+
+        $("#loadingImage2").hide();
+
+        //alert(scrollNumber + " scroll");
+    }
+
+    function ucitajModel(marka) {
+
+        $.get(
+            "/Ponuda/Home/GetModelByMarkaId",
+            { markaId: marka },
+            function (res) {
+                $("#model").html(res);
+            });
+    }
+
+    function proizvodjacClick(id) {
+
+        showLoadingGif();
+
+        scrollNumber = 0;
+
+        $.get(
+            "/Ponuda/Home/GetVozilaByProizvodjacId",
+            { markaId: id },
+            function (res) { successFunction(res, false); });
+
+        // DODATI OVDJE DA SE PONISTE SELECTi !!!
+        var x = document.getElementsByClassName("classForSelectedItem");
+        var i;
+        // kada se klikne na proizvodjaca logo, select od marke postaviti na odabrani a sve ostale ponistiti
+        x[1].value = id;
+        $("#svaVozilaRadioBtn").prop("checked", true);
+        ucitajModel(id);
+        for (i = 0; i < x.length; i++) {
+            if (i != 1) x[i].selectedIndex = 0;
+        }
+
+        //ucitajPonudu();
+
+        //alert(scrollNumber+ " proizvodjacClick");
+
+    }
+
+    function prikaziVozilo(id) {
+
+        $.get(
+            "/Ponuda/Home/GetVoziloDetalji",
+            { id: id },
+            function (res) { $(".ponudaPozadina").html(res); });
+    }
+
+    function uporedi() {
+        $.get(
+            "/Ponuda/Home/UporediVozila",
+            { ids: nizId.toString() },
+            function (res) { $(".ponudaPozadina").html(res); });
+    }
+
+    function sloziVozilaZaUporediti(redBr) {
+
+        var odabrano1 = $("#odabrano1");
+        var odabrano2 = $("#odabrano2");
+        var odabrano3 = $("#odabrano3");
+
+        if (redBr == 0) {
+            odabrano1.html(odabrano2.html());
+            odabrano2.html(odabrano3.html());
+            odabrano3.html("");
+        }
+        else if (redBr == 1) {
+            odabrano2.html(odabrano3.html());
+            odabrano3.html("");
+        } else {
+            odabrano3.html("");
+        }
+
+
+    }
+
+    function ukloniVoziloZaUporedbu(redBr) {
+
+        var noviNiz = new Array();
+        var brojac = 0;
+        for (var i = 0; i < 3; i++)
+            if (i != redBr)
+                noviNiz[brojac++] = nizId[i];
+
+        nizId = noviNiz;
+        brojVozilaZaUporedit--;
+
+        sloziVozilaZaUporediti(redBr);
+
+        if (brojVozilaZaUporedit == 1)
+            $("#uporediBtn").prop('disabled', true);
+
+        if (brojVozilaZaUporedit == 0)
+            $("#uporediDiv").hide();
+
+
+    }
+
+    function dodajVoziloZaUporedbu(id, ime, e) {
+        e.cancelBubble = true;
+        if (e.stopPropagation) e.stopPropagation();
+
+        if (brojVozilaZaUporedit == 3) {
+            alert("Vec odabrana 3 vozila. Uklonite jedno iz panela za poredenje!");
+
+            if (!boolForToggle)
+                toggle();
+
+            return;
+        }
+
+        nizId[brojVozilaZaUporedit] = id;
+        brojVozilaZaUporedit++;
+
+        if (brojVozilaZaUporedit == 1)
+            $("#uporediDiv").css("display", "flex");
+
+        if (brojVozilaZaUporedit == 2)
+            $("#uporediBtn").prop('disabled', false);
+
+
+        if (brojVozilaZaUporedit == 1)
+            $("#odabrano1").html(ime);
+        if (brojVozilaZaUporedit == 2)
+            $("#odabrano2").html(ime);
+        if (brojVozilaZaUporedit == 3)
+            $("#odabrano3").html(ime);
+
+
+    }
+
+
+    function otkrijUporediTxt(id) {
+
+        var ID = "#uporediTxt" + id;
+
+        $(ID).css("visibility", "visible");
+    }
+
+    function sakrijUporediTxt(id) {
+
+        var ID = "#uporediTxt" + id;
+
+        $(ID).css("visibility", "hidden");
+    }
+
+    function otkrijUporediBtn(id) {
+
+        var ID = "#uporediBtn" + id;
+
+        $(ID).css("display", "block");
+    }
+
+    function sakrijUporediBtn(id) {
+
+        var ID = "#uporediBtn" + id;
+
+        $(ID).css("display", "none");
+
+    }
+
+    $(document).ready(function () {
+
+        $("#loadingImage2").hide();
+
+        ucitajPonudu();
+
+
+        // ucitava model za odabranu marku
+        var marka = $("#marka");
+        ucitajModel(marka.val());
+        marka.change(function () {
+            ucitajModel($(this).val());
+        });
+
+    });
+
+    $(document).ajaxComplete(function () {
+        $(".uporediOkvir").click(function (e) {
+
+            var ime = $(this).attr("ime");
+            var id = $(this).attr("voziloId");
+            dodajVoziloZaUporedbu(id, ime, e);
+        });
+    });
+
+</script>
+

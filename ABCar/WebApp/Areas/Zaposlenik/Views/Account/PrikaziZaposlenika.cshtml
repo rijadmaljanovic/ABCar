@@ -1,0 +1,39 @@
+﻿@model UrediZaposlenikaVM
+
+    <div class="card card-5">
+        <div class="card-heading">
+            <h2 class="title">Prikaz podataka o zaposleniku</h2>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-bordered">
+                <tr>
+                    <td>Ime prezime</td>
+                    <td>@(Model.Ime + " " + Model.Prezime)</td>
+                </tr>
+                <tr>
+                    <td>Adresa</td>
+                    <td>@Model.Adresa</td>
+                </tr>
+                <tr>
+                    <td>Grad</td>
+                    <td>@Model.JMBG</td>
+                </tr>
+                <tr>
+                    <td>Broj telefona</td>
+                    <td>@Model.BrojTelefona</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td>Datum zaposlenja  </td>
+                    <td>@Model.DatumZaposljenja</td>
+                </tr>
+            </table>
+            <br />
+            <a class="btn btn-primary" asp-action="UrediZaposlenika">Uredi</a>
+
+        </div>
+    </div>

@@ -1,0 +1,56 @@
+﻿@model ABCar.Models.ViewModels.MarkeModeliViewComponentModel
+
+<div class="row" style="display: flex; align-items: center; height: 120px;">
+
+    <div class="col-sm-4 align-middle">
+        <label>Proizvodjac </label>
+        <select id="marka" asp-items="@Model.Marke" class="form-control">
+            <option value="-1"></option>
+        </select>
+    </div>
+    <div class="col-sm-3 col-sm-offset-1" id="modelDiv">
+    </div>
+    <div class="col-sm-3 col-sm-offset-1" id="logo">
+    </div>
+
+
+</div>
+
+
+<script>
+
+    var marka;
+    var model;
+
+    $(document).ready(function () {
+
+        marka = $("#marka");
+        model = $("#model");
+
+        ucitaj();
+
+        marka.change(function () {
+            ucitaj();
+        });
+
+    });
+
+    function ucitaj() {
+        $.get({
+            url: "/Shared/Ajax/GetModeli",
+            data: { markaId: marka.val(), modelId:'@Model.ModelId' },
+            success: function (res) {
+                $("#modelDiv").html(res);
+            }
+        });
+        $.get({
+            url: "/Shared/Ajax/GetLogo",
+            data: { markaId: marka.val() },
+            success: function (res) {
+                $("#logo").html(res);
+            }
+        });
+    }
+
+</script>
+

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>:: ABCar ::</title>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-zoom/jquery.elevatezoom.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/sidebar.css" rel="stylesheet" />
+    <link href="~/css/ponuda.css" rel="stylesheet" />
+
+</head>
+<body>
+
+        @*NAVBAR + PageContent*@
+
+        @*NAVBAR*@
+        <nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">ABCar</a>
+                    </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @await Component.InvokeAsync(typeof(LayoutLoginComponent))
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid" style="padding: 30px;">
+            @RenderBody()
+        </div>
+
+
+
+</body>
+</html>

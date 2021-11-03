@@ -1,0 +1,186 @@
+﻿@model List<Vozilo>
+
+<div id="res2">
+    @if (Model.Count > 0)
+    {
+    <table class="table table-hover table-responsive">
+        <thead style="font-weight: bold;">
+        <td>Marka</td>
+        <td>Model</td>
+        <td>Akcija</td>
+        <td>Sifra</td>
+        <td></td>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Model.Marka.Naziv</td>
+                    <td>@item.Model.Naziv</td>
+                    <td>@(item.Akcija != null ? item.Akcija.ToString() + "%" : "nije na akciji")</td>
+                    <td>@item.SifraVozila</td>
+                    <td>
+
+                        <div class="btn-group" role="group" aria-label="Basic example" style="float: right;">
+
+                            <a asp-action="UrediPodatkeOVozilu" asp-route-voziloId="@item.Id" class="btn btn-primary">Uredi vozilo</a>
+                            <a asp-action="UrediSlike" asp-route-voziloId="@item.Id" class="btn btn-primary">Uredi slike</a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#akcijaModal" onclick="setVoziloId(@item.Id)">
+                                Uredi akciju
+                            </button>
+
+                            <!-- Modal -->
+                            <!-- The Modal -->
+                            <div class="modal" id="akcijaModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><strong>!!!</strong></h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <label>Akcija (%):</label>
+                                            <input id="akcija" type="number"/>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <a class="btn btn-danger" id="skiniVozSAkcije">Skini vozilo s akcije</a>
+                                            <a class="btn btn-success" id="snimi">Snimi</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#prodajaModal" onclick="setVoziloId(@item.Id)">
+                                Prodaja
+                            </button>
+
+                            <!-- Modal -->
+                            <!-- The Modal -->
+                            <div class="modal" id="prodajaModal">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title text-center"><strong>!!!</strong></h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            <label>Iznos (KM):</label>
+                                            <input id="iznos" type="number"/>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <a class="btn btn-success" id="snimi2">Snimi</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    }
+    else
+    {
+        <div class="text-danger text-center"><strong>Nema rezultata!</strong></div>
+    }
+</div>
+<script>
+
+    var voziloID = -1;
+
+    function setVoziloId(id) {
+        voziloID = id;
+    }
+
+    $(document).ready(function () {
+
+        $('body').removeClass('modal-open');
+
+        var snimi = $("#snimi");
+        var snimi2 = $("#snimi2");
+        var skiniVozSAkcije = $("#skiniVozSAkcije");
+
+        var sifra = $("#sifra").val();
+
+
+
+        snimi.click(function () {
+
+            $('#akcijaModal').modal('hide');
+
+
+            $.get({
+                url: "/Zaposlenik/Vozilo/SetAkcijuZaVozilo",
+                data: {
+                    akcijaPosto: $("#akcija").val(),
+                    voziloId: voziloID,
+                    sifra: sifra
+                },
+                success: function (res) {
+                    $("#res2").html(res);
+
+                }
+            });
+
+        });
+
+        skiniVozSAkcije.click(function () {
+
+            $('#akcijaModal').modal('hide');
+
+            $.get({
+                url: "/Zaposlenik/Vozilo/SetAkcijuZaVozilo",
+                data: {
+                    akcijaPosto: null,
+                    voziloId: voziloID,
+                    sifra: sifra
+                },
+                success: function (res) {
+                    $("#res2").html(res);
+
+                }
+            });
+
+        });
+
+        snimi2.click(function () {
+
+            $('#prodajaModal').modal('hide');
+
+            $.get({
+                url: "/Zaposlenik/Vozilo/ProdajVozilo",
+                data: {
+                    iznos: $("#iznos").val(),
+                    voziloId: voziloID,
+                    sifra: sifra
+                },
+                success: function (res) {
+                    $("#res2").html(res);
+
+                }
+            });
+
+        });
+
+
+    });
+
+
+</script>

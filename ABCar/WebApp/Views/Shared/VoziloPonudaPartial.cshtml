@@ -1,0 +1,59 @@
+﻿@model ABCar.Models.ViewModels.VoziloZaPonudu
+
+
+<div class="col-sm-3">
+    <div class="col-sm-12 ponudaPanel" onclick="prikaziVozilo(@Model.Id)" onmouseover="otkrijUporediBtn(@Model.Id)" onmouseout="sakrijUporediBtn(@Model.Id)">
+        <div class="slikaVozilo">
+            @if (Model.Novo)
+            {
+                <img src="images/Automobili/novo-okvir.png" style="width: 100%; height: 200px; position: absolute" class="okviri" />
+            }
+            @if (Model.Akcija)
+            {
+                <img src="images/Automobili/akcija-okvir.png" style="width: 100%; height: 200px; position: absolute" class="okviri" />
+            }
+
+            <div class="glyphicon glyphicon-dashboard uporediOkvir text-center" id="uporediBtn@(Model.Id)" onmouseover="otkrijUporediTxt(@Model.Id)" onmouseout="sakrijUporediTxt(@Model.Id)" ime="@(Model.Marka+" "+Model.Model)" voziloId="@Model.Id"><p style="font-size: small; visibility: hidden;" id="uporediTxt@(Model.Id)">UPOREDI</p></div>
+
+            @if (Model.ImgPath != null)
+            {
+                <img src="@Model.ImgPath" style="width: 100%; height: 200px; position: relative; z-index: -1;" />
+            }
+            else
+            {
+                <img src="images/no_image_available.png" style="width: 100%; height: 200px; position: relative; z-index: -1;" />
+            }
+
+
+        </div>
+        <div class="podaciVozilo">
+            <h3 class="text-center ponudaImeAuta">@Model.Marka @Model.Model</h3>
+            <table class="table table-responsive">
+                <tr>
+                    <td>Godiste:</td>
+                    <td><strong>@Model.GodinaProizvodnje</strong></td>
+                </tr>
+                <tr>
+                    <td>Cijena:</td>
+                    <td><strong>@Model.Cijena KM</strong></td>
+                </tr>
+                <tr>
+                    <td>Predjeni km:</td>
+                    @if (Model.PredjeniKM != null)
+                    {
+                        <td><strong>@Model.PredjeniKM km</strong></td>
+                    }
+                    else
+                    {
+                        <td><strong> - </strong></td>
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+
+</script>

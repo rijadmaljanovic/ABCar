@@ -1,0 +1,398 @@
+﻿@using ABCar.WebApp.ViewComponents
+@model UrediVoziloVM
+
+<div class="card card-5">
+    <div class="card-heading">
+        <h2 class="title">Evidencija nove nabavke</h2>
+    </div>
+    <div class="card-body">
+        <form asp-action="UrediPodatkeOVozilu" method="post" class="form" role="form" enctype="multipart/form-data">
+
+        <input asp-for="@Model.Vozilo.Id" type="hidden" />
+        <input asp-for="@Model.Vozilo.brojacZaSlike" type="hidden" />
+        <input asp-for="@Model.sifraVozilaZaPretragu" type="hidden" />
+
+
+        @*PROIZVODJAC MODEL*@
+            @await Component.InvokeAsync(typeof(MarkeModeliSelect), new { markaId = Model.Vozilo.Model.MarkaId, modelId = Model.Vozilo.ModelId })
+
+            <strong><span asp-validation-for="@Model.Vozilo.ModelId" class="text-danger"></span></strong>
+
+            <hr />
+            <br />
+
+
+            @*PRVI PANEL*@
+            <div class="row">
+                <div class="col-sm-3">
+                    <label asp-for="@Model.Vozilo.TipVozila"></label>
+                    <select asp-for="@Model.Vozilo.TipVozilaId" asp-items="@Model.RefVrijednosti.VrsteKaroserije" class="form-control" id="karoserija">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.TipVozilaId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.GodinaProizvodnje"></label>
+                    <select asp-for="@Model.Vozilo.GodinaProizvodnje" asp-items="@Model.RefVrijednosti.GodinaProizvodnje" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.GodinaProizvodnje" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.EmisioniStandard"></label>
+                    <select asp-for="@Model.Vozilo.EmisioniStandardId" asp-items="@Model.RefVrijednosti.EmisioniStandardi" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.EmisioniStandardId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label asp-for="@Model.Vozilo.VrstaMotora"></label>
+                    <select asp-for="@Model.Vozilo.VrstaMotoraId" asp-items="@Model.RefVrijednosti.VrsteMotora" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.VrstaMotoraId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.VrstaPogona"></label>
+                    <select asp-for="@Model.Vozilo.VrstaPogonaId" asp-items="@Model.RefVrijednosti.VrstePogona" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.VrstaPogonaId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.BrojSjedecihMjesta"></label>
+                    <select asp-for="@Model.Vozilo.BrojSjedecihMjesta" asp-items="@Model.RefVrijednosti.BrojSjedecihMjesta" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.BrojSjedecihMjesta" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label asp-for="@Model.Vozilo.VrstaMjenjaca"></label>
+                    <select asp-for="@Model.Vozilo.VrstaMjenjacaId" asp-items="@Model.RefVrijednosti.VrsteMjenjaca" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.VrstaMjenjacaId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.BrojBrzina"></label>
+                    <select asp-for="@Model.Vozilo.BrojBrzinaId" asp-items="@Model.RefVrijednosti.BrojBrzina" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.BrojBrzinaId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.VelicinaFelgi"></label>
+                    <select asp-for="@Model.Vozilo.VelicinaFelgi" asp-items="@Model.RefVrijednosti.VelicinaFelgi" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.VelicinaFelgi" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label asp-for="@Model.Vozilo.Boja"></label>
+                    <select asp-for="@Model.Vozilo.BojaId" asp-items="@Model.RefVrijednosti.Boje" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.BojaId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.BrojVrata"></label>
+                    <select asp-for="@Model.Vozilo.BrojVrataId" asp-items="@Model.RefVrijednosti.BrojVrata" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.BrojVrataId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <label asp-for="@Model.Vozilo.VrstaSvjetla"></label>
+                    <select asp-for="@Model.Vozilo.VrstaSvjetlaId" asp-items="@Model.RefVrijednosti.VrsteSvjetla" class="form-control">
+                        <option value="null" disabled selected></option>
+                    </select>
+                    <span asp-validation-for="@Model.Vozilo.VrstaSvjetlaId" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <hr />
+            <br />
+
+            @*CIJENA PANEL*@
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <label asp-for="@Model.Vozilo.SifraVozila"></label>
+                    <input asp-for="@Model.Vozilo.SifraVozila" class="form-control" style="border: 2px solid #ff9999;background-color: #ff000029;" />
+                    <span asp-validation-for="@Model.Vozilo.SifraVozila" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <label>Nabavna cijena</label>
+                    <input asp-for="@Model.NabavnaCijena" class="form-control" style="border: 2px solid #ff9999;background-color: #ff000029;" />
+                    <span asp-validation-for="@Model.NabavnaCijena" class="text-danger"></span>
+                </div>
+                <div class="col-sm-2" style="text-align:-webkit-center;display:inline-grid;">
+                    <label asp-for="@Model.Vozilo.Novo"></label>
+                    <input asp-for="@Model.Vozilo.Novo" id="novo" />
+                </div>
+                <div class="col-sm-5">
+                    <label>Prodajna cijena</label>
+                    <input asp-for="@Model.Vozilo.Cijena" class="form-control" style="border: 2px solid #ff9999;background-color: #ff000029;" />
+                    <span asp-validation-for="@Model.Vozilo.Cijena" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label asp-for="@Model.Vozilo.SnagaMotoraKW"></label>
+                    <input asp-for="@Model.Vozilo.SnagaMotoraKW" class="form-control" />
+                    <span asp-validation-for="@Model.Vozilo.SnagaMotoraKW" class="text-danger"></span>
+                </div>
+                <div class="col-sm-4">
+                    <label asp-for="@Model.Vozilo.SnagaMotoraKS"></label>
+                    <input asp-for="@Model.Vozilo.SnagaMotoraKS" class="form-control" />
+                    <span asp-validation-for="@Model.Vozilo.SnagaMotoraKS" class="text-danger"></span>
+                </div>
+                <div class="col-sm-4">
+                    <label asp-for="@Model.Vozilo.Kubikaza"></label>
+                    <input asp-for="@Model.Vozilo.Kubikaza" class="form-control" />
+                    <span asp-validation-for="@Model.Vozilo.Kubikaza" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div id="polovnoAutoDiv">
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <label asp-for="@Model.Vozilo.PotrosnjaPo100km"></label>
+                        <input asp-for="@Model.Vozilo.PotrosnjaPo100km" class="form-control" />
+                        <span asp-validation-for="@Model.Vozilo.PotrosnjaPo100km" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <label asp-for="@Model.Vozilo.PredjeniKilometri"></label>
+                        <input asp-for="@Model.Vozilo.PredjeniKilometri" class="form-control" />
+                        <span asp-validation-for="@Model.Vozilo.PredjeniKilometri" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <label asp-for="@Model.Vozilo.RegistrovanDo"></label>
+                        <input asp-for="@Model.Vozilo.RegistrovanDo" class="form-control" />
+                        <span asp-validation-for="@Model.Vozilo.RegistrovanDo" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <label asp-for="@Model.Vozilo.BrojPrethodnihVlasnika"></label>
+                        <input asp-for="@Model.Vozilo.BrojPrethodnihVlasnika" class="form-control" />
+                        <span asp-validation-for="@Model.Vozilo.BrojPrethodnihVlasnika" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            @*BOOL PANEL*@
+            <table class="table table-responsive text-left">
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ObicnaKlima" />
+                        <label asp-for="@Model.Vozilo.ObicnaKlima"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.AutomatskaKlima" />
+                        <label asp-for="@Model.Vozilo.AutomatskaKlima"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.DvozonskaKlima" />
+                        <label asp-for="@Model.Vozilo.DvozonskaKlima"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ElPodesavanjeRetrovizora" />
+                        <label asp-for="@Model.Vozilo.ElPodesavanjeRetrovizora"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ElPodesavanjeSjedista" />
+                        <label asp-for="@Model.Vozilo.ElPodesavanjeSjedista"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ElPodizaciProzora" />
+                        <label asp-for="@Model.Vozilo.ElPodizaciProzora"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Alarm" />
+                        <label asp-for="@Model.Vozilo.Alarm"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.CentralnoKljucanje" />
+                        <label asp-for="@Model.Vozilo.CentralnoKljucanje"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.DaljinskoKljucanje" />
+                        <label asp-for="@Model.Vozilo.DaljinskoKljucanje"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Siber" />
+                        <label asp-for="@Model.Vozilo.Siber"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.AutoKuka" />
+                        <label asp-for="@Model.Vozilo.AutoKuka"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.PanoramaKrov" />
+                        <label asp-for="@Model.Vozilo.PanoramaKrov"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ABS" />
+                        <label asp-for="@Model.Vozilo.ABS"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ESP" />
+                        <label asp-for="@Model.Vozilo.ESP"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.SmartStopSistem" />
+                        <label asp-for="@Model.Vozilo.SmartStopSistem"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ZracniJastukPrednji" />
+                        <label asp-for="@Model.Vozilo.ZracniJastukPrednji"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ZracniJastukBocni" />
+                        <label asp-for="@Model.Vozilo.ZracniJastukBocni"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.NaslonjacZaRuku" />
+                        <label asp-for="@Model.Vozilo.NaslonjacZaRuku"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.PutnoRacunalo" />
+                        <label asp-for="@Model.Vozilo.PutnoRacunalo"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.TipkeNaVolanu" />
+                        <label asp-for="@Model.Vozilo.TipkeNaVolanu"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Bluetooth" />
+                        <label asp-for="@Model.Vozilo.Bluetooth"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Mat" />
+                        <label asp-for="@Model.Vozilo.Mat"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Metalik" />
+                        <label asp-for="@Model.Vozilo.Metalik"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.KoznaSjedista" />
+                        <label asp-for="@Model.Vozilo.KoznaSjedista"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Maglenke" />
+                        <label asp-for="@Model.Vozilo.Maglenke"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ZatamnjenaStakla" />
+                        <label asp-for="@Model.Vozilo.ZatamnjenaStakla"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.AluFelge" />
+                        <label asp-for="@Model.Vozilo.AluFelge"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Tempomat" />
+                        <label asp-for="@Model.Vozilo.Tempomat"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ParkingSenzor" />
+                        <label asp-for="@Model.Vozilo.ParkingSenzor"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ParkingAsistent" />
+                        <label asp-for="@Model.Vozilo.ParkingAsistent"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.USB" />
+                        <label asp-for="@Model.Vozilo.USB"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.CD" />
+                        <label asp-for="@Model.Vozilo.CD"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.AUX" />
+                        <label asp-for="@Model.Vozilo.AUX"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Vozilo.Navigacija" />
+                        <label asp-for="@Model.Vozilo.Navigacija"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.MehanickaZastitaProtivKradje" />
+                        <label asp-for="@Model.Vozilo.MehanickaZastitaProtivKradje"></label>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Vozilo.ElZastitaProtivKradje" />
+                        <label asp-for="@Model.Vozilo.ElZastitaProtivKradje"></label>
+                    </td>
+                </tr>
+            </table>
+
+
+            <br />
+            <hr />
+            <br />
+
+            <input type="submit" class="btn btn-success" value="Snimi" />
+
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var novo = $("#novo");
+        var divZaPolovnaAuta = $("#polovnoAutoDiv");
+
+        provjeriNovo();
+
+        novo.change(function () {
+            provjeriNovo();
+        });
+
+
+        function provjeriNovo() {
+            if (novo.is(":checked"))
+                divZaPolovnaAuta.hide();
+            else
+                divZaPolovnaAuta.show();
+        }
+
+    });
+</script>

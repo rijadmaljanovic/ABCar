@@ -1,0 +1,13 @@
+﻿@model int
+
+@if (Model == 0)
+{
+    <a asp-action="PrikaziNotifikacije" asp-controller="Home" asp-area="Kupac"><strong>Obavijesti </strong>@*<span class="caret"></span>*@<span style="font-size:16px;" class="hidden-xs showopacity glyphicon glyphicon-bell"></span></a>
+}
+else
+{
+    <a asp-action="PrikaziNotifikacije" asp-controller="Home" asp-area="Kupac"><strong>Obavijesti </strong>@*<span class="caret"></span>*@<span style="font-size:16px;" class="hidden-xs showopacity glyphicon glyphicon-bell"></span><span style="color: red; font-weight: bold;"> (@Model)</span></a>
+
+}
+
+
